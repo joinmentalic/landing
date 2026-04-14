@@ -140,6 +140,7 @@ h3 {
   padding: 6px 20px;
   border-radius: 12px;
   font-size: 1rem;
+  color: var(--main-contrast);
 }
 
 .main {
@@ -152,7 +153,7 @@ h3 {
 
 .hero {
   background:
-    url("/images/hero-bg.png") no-repeat right 10% center,
+    url("images/hero-bg.png") no-repeat right 10% center,
     var(--card-1-bg);
   border-radius: 40px;
   padding: 0 70px;
@@ -171,6 +172,13 @@ h3 {
   border-radius: 16px;
   font-weight: 500;
   margin-top: 34px;
+  color: var(--main-contrast);
+  display: block;
+  width: max-content;
+}
+
+.about-product-content-button {
+  width: max-content;
 }
 
 .section-anchor {
