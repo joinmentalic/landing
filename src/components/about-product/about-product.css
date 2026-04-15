@@ -1,25 +1,30 @@
 .about-product-content {
-  background-color: #fef2e4;
   border-radius: 24px;
-  padding: 60px;
+  padding: 0 60px;
   display: flex;
   flex-direction: column;
   row-gap: 32px;
   position: relative;
-  margin-top: 90px;
+  margin-top: 32px;
+  height: 351px;
 }
 
 .about-product-content-text {
   max-width: 512px;
   font-size: 1.25rem;
+  margin-top: auto;
+}
+
+.about-product-content-button {
+  margin-bottom: 60px;
 }
 
 .about-product-content-image {
   object-fit: cover;
   position: absolute;
-  right: 0;
-  bottom: 0;
-  height: 351px;
+  inset: 0;
+  width: 100%;
+  z-index: -1;
 }
 
 @media (width <= 1024px) {
@@ -30,6 +35,6 @@
 
 @media (width <= 768px) {
   .about-product-content {
-    padding: 16px;
+    padding: 0 16px;
   }
 }

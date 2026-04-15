@@ -1,4 +1,12 @@
-import { copyFile, mkdir, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
+import {
+  copyFile,
+  mkdir,
+  readFile,
+  readdir,
+  rm,
+  stat,
+  writeFile,
+} from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { basename, extname, join, resolve } from "node:path";
 import { createHash } from "node:crypto";
@@ -44,7 +52,7 @@ function pngToWebpPlugin() {
           return;
         }
 
-        await sharp(pngPath).webp({ quality: 82 }).toFile(webpPath);
+        await sharp(pngPath).webp({ quality: 100 }).toFile(webpPath);
       }),
     );
   }
@@ -55,7 +63,9 @@ function pngToWebpPlugin() {
       await convertPngToWebp();
     },
     configureServer(server) {
-      convertPngToWebp().catch((error) => server.config.logger.error(error.message));
+      convertPngToWebp().catch((error) =>
+        server.config.logger.error(error.message),
+      );
     },
   };
 }
@@ -64,7 +74,11 @@ function htmlPartialsPlugin() {
   const includePattern = /<!--\s*@include\s+(.+?)\s*-->/g;
   const projectRoot = resolve(process.cwd());
 
-  async function resolveIncludes(template, importer = "index.html", seen = new Set()) {
+  async function resolveIncludes(
+    template,
+    importer = "index.html",
+    seen = new Set(),
+  ) {
     const matches = Array.from(template.matchAll(includePattern));
     if (!matches.length) {
       return template;
@@ -88,7 +102,11 @@ function htmlPartialsPlugin() {
 
       seen.add(absolutePath);
       const partialContent = await readFile(absolutePath, "utf8");
-      const resolvedPartial = await resolveIncludes(partialContent, normalizedPath, seen);
+      const resolvedPartial = await resolveIncludes(
+        partialContent,
+        normalizedPath,
+        seen,
+      );
       seen.delete(absolutePath);
       output = output.replace(directive, resolvedPartial);
     }
@@ -125,7 +143,10 @@ function htmlImagesToAssetsPlugin() {
       );
 
       if (imageMatches.length === 0) {
-        await rm(resolve(buildRoot, "images"), { recursive: true, force: true });
+        await rm(resolve(buildRoot, "images"), {
+          recursive: true,
+          force: true,
+        });
         return;
       }
 
@@ -140,7 +161,10 @@ function htmlImagesToAssetsPlugin() {
 
         const sourcePath = resolve(sourceImagesDirectory, relativeImagePath);
         const imageBuffer = await readFile(sourcePath);
-        const hash = createHash("sha256").update(imageBuffer).digest("hex").slice(0, 8);
+        const hash = createHash("sha256")
+          .update(imageBuffer)
+          .digest("hex")
+          .slice(0, 8);
         const filename = basename(relativeImagePath, ".webp");
         const outputName = `${filename}-${hash}.webp`;
         const outputPath = resolve(outputAssetsDirectory, outputName);
@@ -169,7 +193,11 @@ function htmlImagesToAssetsPlugin() {
 
 export default defineConfig({
   base: "./",
-  plugins: [htmlPartialsPlugin(), pngToWebpPlugin(), htmlImagesToAssetsPlugin()],
+  plugins: [
+    htmlPartialsPlugin(),
+    pngToWebpPlugin(),
+    htmlImagesToAssetsPlugin(),
+  ],
   server: {
     open: true,
   },

@@ -36,7 +36,7 @@
 }
 
 .teen-parent-image {
-  padding: 0;
+  padding: 0 !important;
   overflow: hidden;
   border-radius: 24px;
   grid-row: 1 / 3;
