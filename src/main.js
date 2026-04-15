@@ -1,10 +1,10 @@
-const sendButton = document.getElementById("send-button");
 const emailInput = document.getElementById("email-input");
+const emailForm = document.querySelector(".email-form");
 
-if (sendButton && emailInput) {
-  sendButton.addEventListener("click", (event) => {
+if (emailInput && emailForm) {
+  emailForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const link = `https://docs.google.com/forms/d/e/1FAIpQLSdC-kvfT5vp0ITUdxSZDyJYExJvkep9kQ4SNvL68xFr8jwW9w/viewform?usp=pp_url&entry.1045781291=${encodeURIComponent(emailInput.value)}`;
-    window.open(link, "_blank");
+    window.open(link);
   });
 }
