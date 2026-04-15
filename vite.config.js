@@ -168,6 +168,7 @@ function htmlImagesToAssetsPlugin() {
 }
 
 export default defineConfig({
+  base: "./",
   plugins: [htmlPartialsPlugin(), pngToWebpPlugin(), htmlImagesToAssetsPlugin()],
   server: {
     open: true,
