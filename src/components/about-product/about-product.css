@@ -1,0 +1,35 @@
+.about-product-content {
+  background-color: #fef2e4;
+  border-radius: 24px;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  position: relative;
+  margin-top: 90px;
+}
+
+.about-product-content-text {
+  max-width: 512px;
+  font-size: 1.25rem;
+}
+
+.about-product-content-image {
+  object-fit: cover;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 351px;
+}
+
+@media (width <= 1024px) {
+  .about-product-content-image {
+    display: none;
+  }
+}
+
+@media (width <= 768px) {
+  .about-product-content {
+    padding: 16px;
+  }
+}
